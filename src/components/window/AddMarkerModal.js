@@ -1,7 +1,9 @@
 import React from "react";
 import "./modal.css";
+import StarRating from '../../components/rating/StarRating';
+import {CATEGORY_OPTIONS,NUMBER_OF_STARS} from "../../Constants.js";
 
-const Modal = ({ show, landmarkName ,landmarkOpening,handleClose,handleSubmit,handleChange}) => {
+const Modal = ({ show, landmarkName ,landmarkOpening,landmarkCategory,starRating,handleClose,handleSubmit,handleChange}) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
   return (
     <div className={showHideClassName}>
@@ -20,6 +22,15 @@ const Modal = ({ show, landmarkName ,landmarkOpening,handleClose,handleSubmit,ha
           <label className="labels">Enter Opening Hours:</label>
           <input id="landmarkOpening" type="text" value={landmarkOpening} name="landmarkOpening" className="form-control" onChange={handleChange} required/>
           </p>
+          <p>
+            <label className="labels">Category:</label>
+            <select id="landmarkCategory"  name="landmarkCategory" onChange={handleChange}>
+            {CATEGORY_OPTIONS.map(categoryOption =>
+            <option key={categoryOption.value} value={categoryOption.value}>{categoryOption.label}</option>
+          )};
+            </select>
+          </p>
+          <StarRating  numberOfStars={NUMBER_OF_STARS} currentRating="0" editable="true" onClick={handleChange}/>
       </div>
       <div>
         <button className="button buttonRounded" type="submit" >

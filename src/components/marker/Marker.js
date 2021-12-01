@@ -3,7 +3,7 @@ import InfoWindow from "../window/Infowindow";
 import MapIcon from "./mapIcon.jpg";
 
 const Marker = (props: any) => {
-    let { show,name,hours } = props;
+    let { show,name,hours,category,starRating } = props;
 
     return (
       <div style={{cursor: "pointer"  }} >
@@ -12,7 +12,7 @@ const Marker = (props: any) => {
             width= "50px"
             alt={name}
       />
-         {show && <InfoWindow name={name} hours={hours} />}
+         {show && <InfoWindow name={name} hours={hours} category={category} starRating={starRating}/>}
       </div>
     );
   };

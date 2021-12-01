@@ -1,6 +1,9 @@
 
+import StarRating from '../../components/rating/StarRating';
+import {NUMBER_OF_STARS} from "../../Constants.js";
+
 const InfoWindow = (props) => {
-  const { name , hours } = props;
+  const { name , hours , category , starRating } = props;
   const infoWindowStyle = {
     position: "relative",
     bottom: 150,
@@ -21,7 +24,10 @@ const InfoWindow = (props) => {
       <label>Landmark Name: {name}</label>
       <br></br>
       <label>Opening Hours: {hours}</label>
+      <br></br>
+      <label>Category: {category} </label>
       </div>
+      <StarRating  numberOfStars={NUMBER_OF_STARS} currentRating={starRating} editable="false"/>
     </div>
   );
 };

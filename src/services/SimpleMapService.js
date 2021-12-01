@@ -3,6 +3,7 @@ import {EULERIO_KEY,EULERIO_ENDPOINT} from "../Constants.js";
 export const simpleMapService = {
     getLandmarks,
     createLandmarks,
+    getLandmarksFiltered,
 };
 
 function getRequestHeaders() {
@@ -19,8 +20,15 @@ async function getLandmarks() {
     .then((data) => {
       data.forEach((result) => {
         result.show = false;
+        if(result.category == null)
+        {
+          result.category = "UnKown"
+        }
+        if(result.starRating == null)
+        {
+          result.starRating= 0
+        }
       });
-
      return { places: data };
     });
 }
@@ -38,4 +46,40 @@ async function createLandmarks(addPinDetails){
 
         });
    return pinData;
+}
+
+async function getLandmarksFiltered(categoryFilterValue,ratingFilterValue) {
+  var requestObj = {  method: "GET", headers: getRequestHeaders() }
+  let filterUrl = EULERIO_ENDPOINT
+
+  if(ratingFilterValue !== "nofilter"){
+      filterUrl = filterUrl+"?starRating[eq]="+ratingFilterValue
+  }
+
+  if(categoryFilterValue !== "nofilter"){
+    if(ratingFilterValue !== "nofilter"){
+      filterUrl = filterUrl+"&"
+    }
+    else{
+      filterUrl = filterUrl+"?"
+    }
+    filterUrl = filterUrl+"category[eq]="+categoryFilterValue
+  }
+  return fetch(filterUrl,requestObj)
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((result) => {
+        result.show = false;
+        if(result.category == null)
+        {
+          result.category = "UnKown"
+        }
+        if(result.starRating == null)
+        {
+          result.starRating= 0
+        }
+      });
+     return { places: data };
+    });
+
 }
