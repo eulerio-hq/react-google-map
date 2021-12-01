@@ -1,6 +1,6 @@
 export const GOOGLE_API_KEY = "<GOOGLE_API_KEY>";
 export const EULERIO_KEY = "<EULERIO_ACCESS_KEY>";
-export const EULERIO_ENDPOINT = "https://eulerio.com//api/myapi/landmark/";
+export const EULERIO_ENDPOINT = "https://eulerio.com/api/myapi/landmark/";
 
 export  const MAP_OPTIONS = (maps: any) => {
 return {
